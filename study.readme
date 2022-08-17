@@ -1,0 +1,7 @@
+
+- annotation 정리
+@Entity : 이 클래스를 테이블과 매핑시킬게하는 정보
+@Table(name="MEMBER") : 테이블 이름 매핑
+@ID: PK 를 의미
+@Column(name = "ID") 테이블 칼럼명 제공
+
