@@ -55,6 +55,10 @@ public class JpaMain {
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
         System.out.println("members.size=" + members.size());
 
+        Member cacheMember1 = em.find(Member.class, id);
+        Member cacheMember2 = em.find(Member.class, id);
+        System.out.println(cacheMember1 == cacheMember2);
+
         //삭제
         em.remove(member);
 
