@@ -41,7 +41,7 @@ public class JpaMain {
         member.setUsername("지한");
         member.setAge(2);
 
-        //등록 entity를 보고 insert문을 db에 날림
+        //insert 문을, 쓰기지연SQL 저장소에 저장한다. commit 시 실제 db에 날림
         em.persist(member);
 
         //수정 객체를 바꾸면 update문 실행
