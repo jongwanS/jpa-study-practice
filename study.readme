@@ -27,16 +27,39 @@
                        4. db 트랜잭션 커밋!
    > 지연 로딩 :
   #플러시 : 영속성 컨텍스트의 변경 내용을 db에 반영
-   > 말에 어폐가 있음. em.persist(mem1), em.persist(mem2) 한다음 JPQL 실행 하면 플러시가 된다고했는데
-     JPQL 실행후 db조회시, 실제로는 db 저장이 안되어있음.
   #준영속 : 영속성 컨텍스트에서 미관리
-           ■준영속성으로 만드는 방법
+          ■준영속성으로 만드는 방법
            1)entityManger/detach(entity) : 특정 엔티티만 준영속 상태로 만든다
-            > 특정 엔티티의 쓰기지연SQL 저장소, 1차캐시에 모든정보가 제거된다.
+           > 특정 엔티티의 쓰기지연SQL 저장소, 1차캐시에 모든정보가 제거된다.
            2)entityManger.clear() : 영속성 컨텍스트를 완전히 초기화
             > 모든 쓰기지연SQL 저장소, 1차캐시 전부 삭제처리~
            3)entityManger.close() : 영속성 컨텍스트 종료!
             > 영속성 컨텍스트가 아예 삭제됌 (emf.createEntityManager(); //엔티티 매니저 생성의 반대)
 
-           ■특징
+ 4. 엔티티 매핑
+  #객체/테이블 매핑 : @Entity, @Table
+  #기본 키 매핑 : @Id
+  #필드/컬럼 매핑 : @Column
+  #연관관계 매핑 : @ManyToOne, @JoinColumn
+
+ - 어노테이션 정리
+  #@Entity : 테이블과 매핑(다른 패키지 같은 @Entity 클래스가 있을경우, 이름 지정 필요) 기본값 : 클래스명 그대로 사용
+   > 기본생성자 필수(public, protected), 자바는 클래스 생성시 기본 생성자를 만들기 때문 넣어주지 않아도 된다.
+   > final 클래스, enum, interface, inner 클래스 사용 불가
+   > 저장할 필드에 final 사용하면 안 된다.
+
+   한마디로 이야기하자면, @Entity를 class 붙이면 JPA가 관리하도록 만들어줌!
+  #@Table : 매핑할 테이블 지정
+   > name : 매핑할 테이블 이름을 지정
+   > catalog
+   > schema
+   > uniqueConstraints
+
+   JPA가 관리를 할껀데, 어떤테이블인지 명확하게 명칭을 지정해준다.
+
+  #
+
+
+
+
 
