@@ -48,16 +48,38 @@
    > final 클래스, enum, interface, inner 클래스 사용 불가
    > 저장할 필드에 final 사용하면 안 된다.
 
-   한마디로 이야기하자면, @Entity를 class 붙이면 JPA가 관리하도록 만들어줌!
+   한마디로 이야기하자면, @Entity를 class에 붙이면 JPA가 관리하도록 만들어줌!
   #@Table : 매핑할 테이블 지정
    > name : 매핑할 테이블 이름을 지정
    > catalog
    > schema
    > uniqueConstraints
 
-   JPA가 관리를 할껀데, 어떤테이블인지 명확하게 명칭을 지정해준다.
+  #@Column : DB 칼럼으로 선언!
+   > @Column(name = "NAME", nullable = false, length = 10)
+     설명 : DB 칼럼 속성선언 : "NAME" 으로 사용, null 불가, length 10이다.
 
-  #
+  #@Id : 기본키 매핑!
+   > 직접할당 : 어플리케이션에서 할당 (obj.set 형태)
+   > 자동생성 : 외부에서 생성
+     생성법: @GeneratedValue 추가하면 된다.
+    1) IDENTITY : DB에 위임
+      ■ Mysql 의 AUTO_INCREMENT 등 에 사용
+        ex) @GeneratedValue(strategy = GenerationType.IDENTITY)
+    2) SEQUENCE : DB 시퀀스를 사용, 기본키 할당
+      ■ Oracle, h2 db 에서 시퀀스 사용
+        팁 : allocationSize이 50개면, was별로 sequence 50개씩 미리 채번을 하여
+             jvm각 컨테이너별로 미리 시퀀스를 선점하므로 겹치지 않을수 있다.
+        ex) @SequenceGenerator(
+                    name = "BOARD_SEQ_GENERATOR", //식별자 생성기 이름
+                    sequenceName = "BOARD_SEQ", //시퀀스 명!
+                    initialValue = 1, allocationSize = 1//몇개씩 증가 시킬지
+            )
+            @id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
+    3) TABLE : 키 생성 테이블 사용(table에 개발자가 키를 미리 따놓고 사용하는 방식)
+        ex) @GeneratedValue(strategy = GenerationType.TABLE)
+    4) AUTO : JPA(DB벤더를 판단하여)가 자동생성 전략중 알아서 선택해줌!
+
 
 
 

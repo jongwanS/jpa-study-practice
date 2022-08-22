@@ -11,14 +11,17 @@
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" /><!-- db별, 쿼리를 호환해줌 -->
+            <property name="hibernate.physical_naming_strategy" value="io.wisoft.daewon.namingstrategy.CustomPhysicalNamingStrategy" /><!--자바 카멜케이스변환-->
 
             <!-- 옵션 -->
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.show_sql" value="true" /><!--테이블 만드는거 볼수있음 -->
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.use_sql_comments" value="true" />
-            <property name="hibernate.id.new_generator_mappings" value="true" />
+            <property name="hibernate.id.new_generator_mappings" value="true" /><!-- 키 생성전략 사용! -->
 
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <!-- 어플리케이션 실행 시점에, DB 테이블 자동생성!create, update -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            
         </properties>
     </persistence-unit>
 
